@@ -6,7 +6,6 @@ import hashlib
 import time
 import logging
 import io
-import sys
 from unicodedata import decimal
 from pe_parser.asm_parser import AssemblyParser
 import pefile
