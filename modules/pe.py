@@ -25,7 +25,7 @@ def queryVT(checksum):
     return ret
 
 # Análisis del ejecutable con base en su codigo en lenguaje ensamblador, y sus detecciones en virustotal
-def analyzePEExe(path):
+def analyzePEExe(path, outname='analyzePEExeReport'):
     ts = str(int(time.time()))
     logging.basicConfig(level=logging.INFO, filename="analyzePEExeLOG-" + ts + ".log")
     logging.info("Iniciado analisis de ejecutable")
@@ -98,7 +98,7 @@ def analyzePEExe(path):
                     </body>
         </html>
         """.format(path, checksum, properties['arch'], properties['compilationDate'], detections, api_calls_str, base64_asm_img.decode())
-        report_filename = "analyzePEExeReport-" + ts + ".html"
+        report_filename = outname + "-" + ts + ".html"
         logging.info("Finalizado analisis de ejecutable, reporte guardado en " + report_filename)
         with open(report_filename, "w") as report_out:
             report_out.write(html_report)
