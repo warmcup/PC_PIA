@@ -34,27 +34,24 @@ def ComparationHashes():
 info = 'Creador y comparador de hashes 512'
 description="""Ejemplos de uso:
             +Obtener solo una lista de hashes
-                -hash -t1 <hashesBase1.txt> -p <C:/Documentos/trabajos>
+                -hash -f1 <hashesBase1.txt> -r <C:/Documentos/trabajos>
             +Comparar dos listas de Hashes (el primer archivo debe existir previamente)
-                -comp -t1 <hashesBase2.txt> -p <C:/Windows/users/files/datos> -t2 <hashesBase1.txt> """
+                -comp -f1 <hashesBase2.txt> -r <C:/Windows/users/files/datos> -f2 <hashesBase1.txt> """
 parser =argparse.ArgumentParser(description='Creación de hash y comparación de hashes',
                                     epilog = description,
                                     formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument('-ha', '--hash', type=ListaHash,
-                    required=True,
-                    help="Modo de ejecución del script")
-parser.add_argument('-co', '---comp', type=ComparationHashes,
-                    required=True,
-                    help="Modo para compara los hashes previos de un archivo con la lista de nuevos hashes generados")
+parser.add_argument('-ha', '--hash',type=ListaHash,
+        help="Modo de ejecución del script")
+parser.add_argument('-co', '--comp', type=ComparationHashes,
+        help="Modo para compara los hashes previos de un archivo con la lista de nuevos hashes generados")
 parser.add_argument('-r', '--Ruta', type= ValidatePath,
-                    required=True, 
-                    help="Especifica la carpeta de obtencion de hashes. (ruta absoluta)")
+        required=True, 
+        help="Especifica la carpeta de obtencion de hashes. (ruta absoluta)")
 parser.add_argument('-f1', '--file1', 
-                    required=True,
-                    help="Nombre del primer archivo con hashes")
+        required=True,
+        help="Nombre del primer archivo con hashes")
 parser.add_argument('-f2', '--file2',
-                    required=True,
-                    help="Nombre del segundo archivo con hashes (no es necesario tener un segundo arhivo, pues se crea antes de la comparación)")                 
+        help="Nombre del segundo archivo con hashes (no es necesario tener un segundo arhivo, pues se crea antes de la comparación)")                 
 args = parser.parse_args()   
 
 tmpFile1    = args.file1
