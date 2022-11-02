@@ -1,13 +1,11 @@
 #Autor: Jesús Israel Bolaños Uvalle
 
-
 import re
 import os
 import errno
 import sys
 from openpyxl import Workbook
 from cryptography.fernet import Fernet
-
 
                                     #################### EXPRESIONES REGULARES #######################
 
@@ -18,7 +16,6 @@ expIp= r'(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]
 expusuarios=  r'user=([a-z0-9!#$%&*+/=?^_`.@{|}~-]+)'
 
 expnumeros= r'[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-]){2}\d{3}|(\d{2}[\*\.\-\s]){3}\d{2}|(\d{4}[\*\.\-\s]){1}\d{4})|\d{8}|\d{10}|\d{12}'
-
 
 
                   ############################################### BLOQUE DE FUNCIONES #######################################################
@@ -51,8 +48,6 @@ def recoleccion():
         #Llamamos la funcion "buscaruta" para buscar el archivo en toda la PC
         print("Buscando archivo...\n")
         buscaruta(nombre)
-
-
             
         #Lee el contenido del archivo
         with open(archivo,'r') as file:
@@ -89,10 +84,7 @@ def recoleccion():
         print("\n##### No se encontraron coincidencias del dato solicitado #####\n")
         print("##### Ingrese otro archivo #####\n")
         continue
-
-
-
-        
+      
                         ####################################### BLOQUE DE ENCRIPTACION #######################################
     
 def encriptar(nom_archivo):
@@ -115,7 +107,6 @@ def encriptar(nom_archivo):
     encrypted_data = a.encrypt(archivo_info)
     with open(nom_archivo, 'wb') as file:
         file.write(encrypted_data)
-
 
                             ####################################### BLOQUE DE DESENCRIPTACION ###############################################
                
