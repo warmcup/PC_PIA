@@ -7,15 +7,14 @@ import sys
 from openpyxl import Workbook
 from cryptography.fernet import Fernet
 
+
                                     #################### EXPRESIONES REGULARES #######################
 
 expcorreos=r'[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])'
 
 expIp= r'(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
 
-expusuarios=  r'user=([a-z0-9!#$%&*+/=?^_`.@{|}~-]+)'
-
-expnumeros= r'[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-]){2}\d{3}|(\d{2}[\*\.\-\s]){3}\d{2}|(\d{4}[\*\.\-\s]){1}\d{4})|\d{8}|\d{10}|\d{12}'
+expusuarios=  r'user=([a-zA-Z0-9!#$%&*+/=?^_`.@{|}~-]+)'
 
 
                   ############################################### BLOQUE DE FUNCIONES #######################################################
@@ -48,7 +47,7 @@ def recoleccion():
         #Llamamos la funcion "buscaruta" para buscar el archivo en toda la PC
         print("Buscando archivo...\n")
         buscaruta(nombre)
-            
+      
         #Lee el contenido del archivo
         with open(archivo,'r') as file:
             contenido= file.read()
@@ -84,7 +83,10 @@ def recoleccion():
         print("\n##### No se encontraron coincidencias del dato solicitado #####\n")
         print("##### Ingrese otro archivo #####\n")
         continue
-      
+
+
+
+        
                         ####################################### BLOQUE DE ENCRIPTACION #######################################
     
 def encriptar(nom_archivo):
@@ -108,13 +110,14 @@ def encriptar(nom_archivo):
     with open(nom_archivo, 'wb') as file:
         file.write(encrypted_data)
 
+
                             ####################################### BLOQUE DE DESENCRIPTACION ###############################################
                
         
 def desencriptar(nom_archivo):
     #Nos movemos a la carpeta en donde se encuentran los datos encriptados
     a= os.path.abspath('DATOS')
-    #os.chdir(a)
+    os.chdir(a)
     #print(a)
     def call_key():
         llave=input("Ingrese el nombre del archivo que contiene su llave: ")
@@ -140,7 +143,7 @@ def desencriptar(nom_archivo):
             hoja['B1'] = "CORREOS"
             hoja['G1'] = "IPs"
             hoja['J1'] = 'Usuarios'
-            hoja['M1'] = 'Números'
+
             if expregular == expcorreos:
                 long= len(buscar)
                 for x in range(long):
@@ -156,11 +159,6 @@ def desencriptar(nom_archivo):
                 for x in range(long):
                     hoja[f'I{x +2}'] = buscar[x]
 
-            elif expregular == expusurips:
-                long= len(buscar)
-                for x in range(long):
-                    hoja[f'L{x +2}'] = buscar[x]
-                    
             separador()
             os.chdir(directorio)
         except:
@@ -185,11 +183,9 @@ while y == '1':
     print("[1] ENCRIPTAR CORREOS")
     print("[2] ENCRIPTAR IP")
     print("[3] ENCRIPTAR Usuarios")
-    print("[4] ENCRIPTAR Numeros")
-    print("[5] DESENCRIPTAR CORREOS Y HACER UN REPORTE")
-    print("[6] DESENCRIPTAR IP Y HACER UN REPORTE")
-    print("[7] DESENCRIPTAR Usuarios Y HACER UN REPORTE")
-    print("[8] DESENCRIPTAR Numeros Y HACER UN REPORTE")
+    print("[4] DESENCRIPTAR CORREOS Y HACER UN REPORTE")
+    print("[5] DESENCRIPTAR IP Y HACER UN REPORTE")
+    print("[6] DESENCRIPTAR Usuarios Y HACER UN REPORTE")
     #a= os.getcwd()
     #print(a)
     opciones= input("¿Qué desea hacer? ")
@@ -213,35 +209,24 @@ while y == '1':
         print("\nEncriptación correcta!! :D\n")
         
     elif opciones == '4':
-        expregular= expnumeros
-        nomdatos='Numeros'
-        recoleccion()
-        print("\nEncriptación correcta!! :D\n")
-        
-    elif opciones == '5':
         expregular= expcorreos
         nom_archivo= input("Nombre del archivo encriptado: ")
         desencriptar(nom_archivo)
         print("\nDesencriptación correcta!! :D\n")
 
-    elif opciones == '6':
+    elif opciones == '5':
         nom_archivo= input("Nombre del archivo encriptado: ")
         expregular= expIp
         desencriptar(nom_archivo)
         print("\nDesencriptación correcta!! :D\n")
         
-    elif opciones == '7':
+    elif opciones == '6':
         expregular= expusuarios
         nom_archivo= input("Nombre del archivo encriptado: ")
         desencriptar(nom_archivo)
         print("\nDesencriptación correcta!! :D\n")
         
-    elif opciones == '8':
-        expregular= expnumeros
-        nom_archivo= input("Nombre del archivo encriptado: ")
-        desencriptar(nom_archivo)
-        print("\nDesencriptación correcta!! :D\n")
-        
+
     y= input("¿Desea hacer otra cosa? [1]SI, [2]NO: ")
     #a= os.getcwd()
     #print(a)
