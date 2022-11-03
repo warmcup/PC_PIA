@@ -64,8 +64,7 @@ def analyzePEExe(path, outname='analyzePEExeReport'):
         base64_asm_img = base64.b64encode(raw_img.read())
         api_features = asm_parser.extract_API_features()
         api_calls_list = []
-        for a in api_features:
-            n = api_features.get(a)
+        for a, n in api_features.items():
             if n:
                 api_calls_list.append("<td>" + a[8:] + "()" + "</td><td>" + str(n) + "</td></tr>")
         api_calls_str = "<tr>" + "<tr>".join(api_calls_list)
