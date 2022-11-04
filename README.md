@@ -69,7 +69,7 @@ Realiza la extracción de datos específicos (correos, ip, usuarios) en archivos
 #### Ejemplos de uso
 Encriptar los datos encontrados en el archivo Ejem1.txt y guardar la llave de encripción con el nombre encript.key
 ```powershell
-python main.py cripto -m encrp -a C:\Users\HP\Desktop\PIA\Ejem1.txt -llave encript.key
+python main.py cripto -m encrp -a C:\Users\HP\Desktop\PIA\Ejem1.txt -llv encript.key
 ```
 
 Desencriptar los archivos que se encuentran en la carpeta DATOS con la llave encript.key
