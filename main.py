@@ -1,5 +1,6 @@
 import modules.pe as pe
 import modules.hashes as hashes
+import modules.criptografia as cripto
 import argparse
 
 if __name__ == '__main__':
@@ -39,7 +40,18 @@ if __name__ == '__main__':
                         help="Nombre del archivo a guardar con hashes; necesario para el modo dump")
     parser_hash.add_argument('-ha', '--hashfile', dest='hashfile',
                         help="Nombre del archivo con hashes contra el cual comparar; necesario para el modo comp")
-        
+    parser_cripto = subparsers.add_parser('cripto', help='Realiza la extracción de datos para la encriptación y desencriptación de los datos, para generar un reporte.', epilog=ejemplos_cripto, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser_cripto.add_argument('-m', '--modo', dest='modo',
+                        required=True,
+                        help="Modo de ejecución: encrp (encriptar) , desen (desencriptar)")                     
+    parser_cripto.add_argument('-a', '--archivo', dest='archivo',
+                        required=True, 
+                        help="En Encriptación, especifica el archivo en donde se realizará la extracción(ruta absoluta). En Desencriptacion, especifica la carpeta en donde se encuentren los archivos encriptados(ruta absoluta)")
+    parser_cripto.add_argument('-llv', '--llave', dest='llave',
+                        required=True, 
+                        help="Especifica el nombre de la llave (recuerda el .key)")
+    
+    
     args = parser.parse_args()
 
     if args.command:
@@ -64,5 +76,8 @@ if __name__ == '__main__':
                             print('No coinciden')
                 else:
                     print('Se requiere un argumento para el parametro --hashfile en el modo dump.')
+        if args.command == 'cripto':
+            if args.modo == 'encrp':
+                
 
     
