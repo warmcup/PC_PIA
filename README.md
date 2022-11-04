@@ -1,0 +1,69 @@
+# PC_PIA
+
+## Propósito
+Este proyecto busca proveer una herramienta que lleve a cabo tareas relacionadas con el rubro de la ciberseguridad, aplicando los conocimientos adquiridos a lo largo del curso de 'Programación para Ciberseguridad'.
+
+## Instalación
+```powershell
+git clone https://github.com/warmcup/PC_PIA
+cd PC_PIA
+pip3 install -r requirements.txt
+```
+> **Advertencia:** este software solo asegura compatibilidad con Windows 10 y Windows 11, usando Python 3.10+
+
+## Funcionalidad
+El programa posee 4 módulos que realizan distintas tareas. Para acceder a ellas, se deben utilizar diferentes argumentos al llamar al script.
+
+### Módulo hash
+Genera y compara sumas de comprobación para toda una carpeta. Estas son procesadas como archivos que el programa produce.
+
+#### Argumentos admitidos
+
+| Argumento     | Descripción |
+|:-------------:|:---------------:|
+| -m MODE, --mode MODE |  Modo de ejecucion: dump (obtener), comp (comparar) |
+| -r PATH, --ruta PATH | Especifica la carpeta para la obtencion de hashes (ruta absoluta) |
+| -o OUTFILE, --outfile OUTFILE | Nombre del archivo a guardar con hashes; necesario para el modo dump |
+| -ha HASHFILE, --hashfile HASHFILE | Nombre del archivo con hashes contra el cual comparar; necesario para el modo comp |
+              
+#### Ejemplos de uso
+Obtener una lista de hashes de los archivos en todas las subcarpetas de C:\Documentos\trabajos\:
+```powershell
+python main.py hash -m dump -o hashesBase1.txt -r C:\Documentos\trabajos\
+```
+
+Comparar los hashes de los archivos en todas las subcarpetas de C:\Windows\users\files\datos\, con los almacenados en hashesBase1.txt:
+```powershell
+python main.py hash --mode comp --hashfile hashesGuardados.txt --ruta C:\Windows\users\files\datos\
+```
+
+### Módulo analyze
+Analiza un ejecutable portable (PE). Crea un reporte con la información encontrada sobre él, entre la que se encuentra:
++ Fecha de compilación
++ Detecciones en VirusTotal
++ Funciones del sistema llamadas
++ Representación gráfica del código en lenguaje ensamblador
+
+#### Argumentos admitidos
+
+| Argumento     | Descripción |
+|:-------------:|:---------------:|
+| -e EXEPATH, --exepath EXEPATH |  Ruta del ejecutable portable a analizar |
+| -o OUTPREFIX, --outprefix OUTPREFIX | Prefijo para el nombre de archivo del reporte generado |
+              
+#### Ejemplo de uso
+Analizar el ejecutable portable sample.bin:
+```powershell
+python main.py analyze -e sample.bin
+```
+
+### Módulo cripto
+
+### Módulo scan
+
+## Créditos
++ **@al3xand3r07**: módulo hash
++ **@Angeltrst03**: módulo scan
++ **@BsIsraU08**: módulo cripto
++ **@warmcup**: módulo analyze
++ **Daniel Gibert (daniel.gibertlla@gmail.com)**: desarrollador del módulo pe-parser
