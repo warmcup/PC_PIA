@@ -58,6 +58,26 @@ python main.py analyze -e sample.bin
 ```
 
 ### Módulo cripto
+Realiza la extracción de datos específicos (correos, ip, usuarios) en archivos, para la encriptación y desencriptación de los datos, para generar un reporte. 
+
+| Argumento     | Descripción |
+|:-------------:|:---------------:|
+| -m MODO, --modo MODO |  Modo de ejecución: encrp (encriptar) , desen (desencriptar) |
+| -a ARCHIVO, --archivo ARCHIVO | En Encriptación, especifica el archivo en donde se realizará la extracción(ruta absoluta). En Desencriptacion, especifica la carpeta en donde se encuentren los archivos encriptados(ruta absoluta)." |
+| -llv LLAVE, --llave LLAVE | Especifica el nombre de la llave (recuerda el .key) |
+              
+#### Ejemplos de uso
+Encriptar los datos encontrados en el archivo Ejem1.txt y guardar la llave de encripción con el nombre encript.key
+```powershell
+python main.py cripto -m encrp -a C:\Users\HP\Desktop\PIA\Ejem1.txt -llave encript.key
+```
+
+Desencriptar los archivos que se encuentran en la carpeta DATOS con la llave encript.key
+```powershell
+python main.py cripto -m desen -a C:\Users\HP\Desktop\PIA\DATOS -llv encript.key
+```
+
+
 
 ### Módulo scan
 
