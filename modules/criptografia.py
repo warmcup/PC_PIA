@@ -162,21 +162,7 @@ def desencriptar(nom_carpeta, llave):
 
                         ####################################### MENU ###############################################
 
-
-parser_crip = argparse.ArgumentParser()
-parser_crip.add_argument('-m', '--modo', dest='modo',
-                        required=True,
-                        help="Modo de encriptar: encrp .  Modo desencriptar: desen .")
-                        
-parser_crip.add_argument('-a', '--archivo', dest='archivo',
-                        required=True, 
-                        help="En el modo de Encriptación, especifica el archivo en donde se realizará la extracción(ruta absoluta). En el modo de Desencriptacion, espcifica la carpeta en donde se encuentren los archivos encriptados(ruta absoluta).")
-
-parser_crip.add_argument('-llv', '--llave', dest='llave',
-                        required=True, 
-                        help="Especifica el nombre de la llave")
-    
-args = parser_crip.parse_args()
+args = parser_cripto.parse_args()
 modo = args.modo
 archivo = args.archivo
 llave = args.llave
