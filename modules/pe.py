@@ -25,9 +25,9 @@ def queryVT(checksum):
     return ret
 
 # Análisis del ejecutable con base en su codigo en lenguaje ensamblador, y sus detecciones en virustotal
-def analyzePEExe(path, outname='analyzePEExeReport'):
+def analyzePE(path, outname='analyzePEReport'):
     ts = str(int(time.time()))
-    logging.basicConfig(level=logging.INFO, filename="analyzePEExeLOG-" + ts + ".log")
+    logging.basicConfig(level=logging.INFO, filename="analyzePELOG-" + ts + ".log")
     logging.info("Iniciado analisis de ejecutable")
     try:
         # Extracción de metadatos del encabezado PE
@@ -103,6 +103,6 @@ def analyzePEExe(path, outname='analyzePEExeReport'):
             report_out.write(html_report)
         return report_filename
     except Exception as e:
-        logging.error("Excepcion en analyzePEExe(): {}. Saliendo de la rutina...".format(e))
+        logging.error("Excepcion en analyzePE(): {}. Saliendo de la rutina...".format(e))
         return None
 
