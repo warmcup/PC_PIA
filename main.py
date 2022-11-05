@@ -83,9 +83,9 @@ if __name__ == '__main__':
         if args.command == 'cripto':
             if args.modo == 'encrp':
                 cripto.recoleccion(args.archivo, args.llave)
-            elif args.modo == 'desenc':
+            elif args.modo == 'desen':
                 cripto.desencriptar(args.archivo, args.llave)
             else:
-                print('Modo no soportado. Validos: encrp, desenc')
+                print('Modo no soportado. Validos: encrp, desen')
 
     
