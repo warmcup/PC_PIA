@@ -24,12 +24,16 @@ if __name__ == '__main__':
                  cripto -m desen -a C:\Users\HP\Desktop\PIA\DATOS -llv encript.key     
                  '''
 
-    parser = argparse.ArgumentParser(epilog=desc)
+    parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command', help='Funciones')
     parser_pe = subparsers.add_parser('analyze', help='Analiza un ejecutable portable, y genera su reporte con los resultados', epilog=ejemplos_pe, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser_pe.add_argument('-e', '--exepath', required=True, help='Ruta del ejecutable portable a analizar')
-    parser_pe.add_argument('-o', '--outprefix', help='Prefijo para el nombre de archivo del reporte generado')
-    parser_hash = subparsers.add_parser('hash', help='Crea y compara hashes sha512 de todos los archivos en una carpeta', epilog=ejemplos_hash, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser_pe.add_argument('-e', '--exepath', dest='exepath', 
+                        required=True, 
+                        help='Ruta del ejecutable portable a analizar')
+    parser_pe.add_argument('-o', '--outprefix', dest='outprefix', 
+                        help='Prefijo para el nombre de archivo del reporte generado')
+    parser_hash = subparsers.add_parser('hash',
+                        help='Crea y compara hashes sha512 de todos los archivos en una carpeta', epilog=ejemplos_hash, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser_hash.add_argument('-m', '--mode', dest='mode',
                         required=True,
                         help="Modo de ejecucion: dump (obtener), comp (comparar)")
@@ -40,20 +44,18 @@ if __name__ == '__main__':
                         help="Nombre del archivo a guardar con hashes; necesario para el modo dump")
     parser_hash.add_argument('-ha', '--hashfile', dest='hashfile',
                         help="Nombre del archivo con hashes contra el cual comparar; necesario para el modo comp")
-    parser_cripto = subparsers.add_parser('cripto', help='Realiza la extracción de datos para la encriptación y desencriptación de los datos, para generar un reporte.', epilog=ejemplos_cripto, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser_cripto = subparsers.add_parser('cripto', help='Realiza la extracción de datos sensibles en un archivo, así como su encriptación y desencriptación, y la generación de un reporte', epilog=ejemplos_cripto, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser_cripto.add_argument('-m', '--modo', dest='modo',
                         required=True,
                         help="Modo de ejecución: encrp (encriptar) , desen (desencriptar)")                     
     parser_cripto.add_argument('-a', '--archivo', dest='archivo',
                         required=True, 
-                        help="En Encriptación, especifica el archivo en donde se realizará la extracción(ruta absoluta). En Desencriptacion, especifica la carpeta en donde se encuentren los archivos encriptados(ruta absoluta)")
+                        help="En Encriptación, especifica el archivo en donde se realizará la extracción(ruta absoluta). En Desencriptacion, especifica la carpeta en donde se encuentren los archivos encriptados (ruta absoluta)")
     parser_cripto.add_argument('-llv', '--llave', dest='llave',
                         required=True, 
                         help="Especifica el nombre de la llave (recuerda el .key)")
     
-    
     args = parser.parse_args()
-
     if args.command:
         if args.command == 'analyze':
             if args.outprefix:
@@ -66,7 +68,7 @@ if __name__ == '__main__':
                     hashes.dumpHashes(args.path, args.outfile)
                 else:
                     print('Se requiere un argumento para el parametro --outfile en el modo dump.')
-            if args.mode == 'comp':
+            elif args.mode == 'comp':
                 if args.hashfile:
                     result = hashes.compareHashes(args.path, args.hashfile)
                     if result != None:
@@ -76,8 +78,14 @@ if __name__ == '__main__':
                             print('No coinciden')
                 else:
                     print('Se requiere un argumento para el parametro --hashfile en el modo dump.')
+            else:
+                print('Modo no soportado. Validos: dump, comp')
         if args.command == 'cripto':
             if args.modo == 'encrp':
-                
+                cripto.recoleccion(args.archivo, args.llave)
+            elif args.modo == 'desenc':
+                cripto.desencriptar(args.archivo, args.llave)
+            else:
+                print('Modo no soportado. Validos: encrp, desenc')
 
     

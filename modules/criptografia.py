@@ -1,10 +1,7 @@
 #Autor: Jesús Israel Bolaños Uvalle
 
-import argparse
 import re
 import os
-import errno
-import sys
 from openpyxl import Workbook
 from cryptography.fernet import Fernet
 
@@ -29,9 +26,9 @@ def recoleccion(archivo, llave):
             contenido= file.read()
             
         #Buscamos los correos, ip y usuarios en el archivo
-        buscar1=re.findall(expregular1, contenido)
-        buscar2=re.findall(expregular2, contenido)
-        buscar3=re.findall(expregular3, contenido)
+        buscar1=re.findall(expcorreos, contenido)
+        buscar2=re.findall(expIp, contenido)
+        buscar3=re.findall(expusuarios, contenido)
         
         #Creamos la carpeta DATOs
         try:
@@ -137,9 +134,9 @@ def desencriptar(nom_carpeta, llave):
         for archivo in lista:
             with open(archivo,'r') as file:
                 contenido= file.read()
-            buscar1=re.findall(expregular1, contenido)
-            buscar2=re.findall(expregular2, contenido)
-            buscar3=re.findall(expregular3, contenido)
+            buscar1=re.findall(expcorreos, contenido)
+            buscar2=re.findall(expIp, contenido)
+            buscar3=re.findall(expusuarios, contenido)
 
             co= len(buscar1)
             ip= len(buscar2)
@@ -159,27 +156,4 @@ def desencriptar(nom_carpeta, llave):
         
     except FileNotFoundError:
         print('\nHay un archivo que no se puede desencriptar')
-
-                        ####################################### MENU ###############################################
-
-args = parser_cripto.parse_args()
-modo = args.modo
-archivo = args.archivo
-llave = args.llave
-
-if modo == 'encrp':
-    expregular1= expcorreos
-    expregular2= expIp
-    expregular3= expusuarios
-
-    recoleccion(archivo, llave)
-    print("\nEncriptación correcta!! :D\n")
-        
-elif modo == 'desen':
-    expregular1= expcorreos
-    expregular2= expIp
-    expregular3= expusuarios
-    
-    desencriptar(archivo, llave)
-    print("\nDesencriptación correcta!! :D\n")
     
