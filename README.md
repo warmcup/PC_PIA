@@ -40,9 +40,18 @@ python main.py hash --mode comp --hashfile hashesGuardados.txt --ruta C:\Windows
 ### Módulo analyze
 Analiza un ejecutable portable (PE). Crea un reporte con la información encontrada sobre él, entre la que se encuentra:
 + Fecha de compilación
-+ Detecciones en VirusTotal
++ Detecciones en VirusTotal (búsqueda por checksum)*
 + Funciones del sistema llamadas
 + Representación gráfica del código en lenguaje ensamblador
+
+***Para hacer uso de la funcionalidad de busqueda por checksum en VirusTotal, se debe editar el archivo modules/pe.py:**
+
+```python
+def queryVT(checksum):
+    ...
+    auth = {'x-apikey' : 'SU_API_KEY'}
+    ...
+```
 
 #### Argumentos admitidos
 
