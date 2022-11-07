@@ -103,6 +103,7 @@ def analyzePE(path, outname='analyzePEReport'):
             report_out.write(html_report)
         return report_filename
     except Exception as e:
+        print('Error: revise ' + "analyzePELOG-" + ts + ".log para más informacion")
         logging.error("Excepcion en analyzePE(): {}. Saliendo de la rutina...".format(e))
         return None
 
