@@ -19,11 +19,11 @@ if __name__ == '__main__':
     
     ejemplos_cripto = '''Ejemplos de uso:
             + Encriptar los datos encontrados en el archivo Ejem1.txt y guardar la llave de encripción con el nombre encript.key
-                 cripto -m encrp -a C:\Users\HP\Desktop\PIA\Ejem1.txt -llv encript.key
+                cripto -m encrp -a C:\\Users\\HP\\Desktop\\PIA\\Ejem1.txt -llv encript.key
             + Desencriptar los archivos que se encuentran en la carpeta DATOS con la llave encript.key
-                 cripto -m desen -a C:\Users\HP\Desktop\PIA\DATOS -llv encript.key     
-                 '''
-
+                cripto -m desen -a C:\\Users\\HP\\Desktop\\PIA\\DATOS -llv encript.key 
+                '''
+                
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command', help='Funciones')
     parser_pe = subparsers.add_parser('analyze', help='Analiza un ejecutable portable, y genera su reporte con los resultados', epilog=ejemplos_pe, formatter_class=argparse.RawDescriptionHelpFormatter)
