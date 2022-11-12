@@ -1,3 +1,4 @@
+#Autor: Yosafat Aguirre Hernandez
 import hashlib
 import os
 import pickle
