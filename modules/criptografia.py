@@ -32,11 +32,11 @@ def recoleccion(archivo, llave):
         
         #Creamos la carpeta DATOs
         try:
-            os.mkdir('DATOS')
-            a = os.path.abspath('DATOS')
+            os.mkdir('DATOS_PIA')
+            a = os.path.abspath('DATOS_PIA')
             os.chdir(a)
         except FileExistsError:
-            a = os.path.abspath('DATOS')
+            a = os.path.abspath('DATOS_PIA')
             os.chdir(a)
                 
     #La creación de la llave
@@ -80,12 +80,14 @@ def recoleccion(archivo, llave):
                         ####################################### BLOQUE DE ENCRIPTACION #######################################
     
 def encriptar(nom_archivo, llave):
-    
+  try:
     with open(nom_archivo,"rb") as file:
         archivo_info = file.read()
     encrypted_data = llave.encrypt(archivo_info)
     with open(nom_archivo, 'wb') as file:
         file.write(encrypted_data)
+  except:
+    print('Ocurrio un error en la encriptación')
 
 
                             ####################################### BLOQUE DE DESENCRIPTACION ###############################################
@@ -148,4 +150,4 @@ def desencriptar(nom_carpeta, llave):
         reporte.save("Reporte de Encriptación.xlsx")
         
     except:
-        print('Ocurrio un error')
+        print('Hubo un error en la desencriptación')
