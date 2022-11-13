@@ -1,4 +1,5 @@
 #Autor: Jesús Israel Bolaños Uvalle
+#Matrícula: 2005587
 
 import re
 import os
@@ -19,8 +20,7 @@ expusuarios=  r'(user=[a-zA-Z0-9!#$%&*+/=?^_`.@{|}~-]+)'
 
 #Función para la extracción de los datos
 def recoleccion(archivo, llave):
-    while True:
-      
+    try:
         #Lee el contenido del archivo
         with open(archivo,'r') as file:
             contenido= file.read()
@@ -56,31 +56,27 @@ def recoleccion(archivo, llave):
 
     # Buscamos los correos, ip y usuarios, dependiendo cual encuentre lo va agarrar en una archivo en especifico
         for x in buscar1:
-            nom1= 'Correos.txt'
-            with open('Correos.txt', 'a') as file:
+            nom1= 'Correos.rz'
+            with open('Correos.rz','a') as file:
                 file.write(x)
                 file.write('\n')
         encriptar(nom1, llave)
 
         for x in buscar2:
-            nom2='Ips.txt'
-            with open('Ips.txt', 'a') as file:
+            nom2='Ips.rz'
+            with open('Ips.rz', 'a') as file:
                 file.write(x)
                 file.write('\n')
         encriptar(nom2, llave)
 
         for x in buscar3:
-            nom3='Usuarios.txt'
-            with open('Usuarios.txt', 'a') as file:
+            nom3='Usuarios.rz'
+            with open('Usuarios.rz', 'a') as file:
                 file.write(x)
                 file.write('\n')
         encriptar(nom3, llave)
-
-        break
-
-
-
-        
+    except:
+        print('Ocurrio un error')
                         ####################################### BLOQUE DE ENCRIPTACION #######################################
     
 def encriptar(nom_archivo, llave):
@@ -95,22 +91,19 @@ def encriptar(nom_archivo, llave):
                             ####################################### BLOQUE DE DESENCRIPTACION ###############################################
                
 def desencriptar(nom_carpeta, llave):
-
-    os.chdir(nom_carpeta)
-
-    #Llamamos a la llave para utilizarla
-    def call_key():
-        return open(llave, "rb").read()
-    
-    key= call_key()
-    llave = Fernet(key)
-    
     try:
-        lista=[]
+        os.chdir(nom_carpeta)
+        #Llamamos a la llave para utilizarla
+        def call_key():
+            return open(llave, "rb").read()
+        
+        key= call_key()
+        llave = Fernet(key)
 
-        #Buscamos en el directorio todos los archivos que tengan la terminación .txt
+        lista=[]
+        #Buscamos en el directorio todos los archivos que tengan la terminación .rz
         for archivo in os.listdir():
-            if archivo.endswith(".txt"):
+            if archivo.endswith(".rz"):
                 lista.append(archivo)
 
         #Cada archivo que se encontro se le va a desencriptar
@@ -154,6 +147,5 @@ def desencriptar(nom_carpeta, llave):
 
         reporte.save("Reporte de Encriptación.xlsx")
         
-    except FileNotFoundError:
-        print('\nHay un archivo que no se puede desencriptar')
-    
+    except:
+        print('Ocurrio un error')
