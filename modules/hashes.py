@@ -22,9 +22,8 @@ def ValidatePath(thePath):
         raise FileNotFoundError('La ruta no está disponible')
 
 # Cambiando la ruta de la carpeta con archivos a hashear
-# se crea un diccionario con los hashes y nombres de archivos
+# se crea un conjunto con los hashes y nombres de archivos
 def Hashes(ruta):
-    # set para que no importen los nombres de los archivos
     setHashes = set()
     os.chdir(ruta)
     for root, dirs, files in os.walk(".", topdown=False):
@@ -39,8 +38,6 @@ def Hashes(ruta):
                 print("Ocurrió un error inesperado: " + str(e))
     return setHashes
 #=====================================================
-
-# Funciones que ejecutan dependiendo del modo del script
 
 # Dumpea un archivo en formato pickle el set con hashes
 def dumpHashes(path, outfile):
