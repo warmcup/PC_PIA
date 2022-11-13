@@ -9,6 +9,8 @@ git clone https://github.com/warmcup/PC_PIA
 cd PC_PIA
 pip3 install -r requirements.txt
 ```
+Además de los pasos anteriores, se debe de [instalar bash](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/) en su sistema.
+
 > **Advertencia:** este software solo asegura compatibilidad con Windows 10 y Windows 11, usando Python 3.10+
 
 ## Funcionalidad
