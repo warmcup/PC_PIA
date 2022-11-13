@@ -76,7 +76,7 @@ def recoleccion(archivo, llave):
                 file.write('\n')
         encriptar(nom3, llave)
     except:
-        print('Ocurrio un error')
+        print('Ocurrio un error en la recolección')
                         ####################################### BLOQUE DE ENCRIPTACION #######################################
     
 def encriptar(nom_archivo, llave):
