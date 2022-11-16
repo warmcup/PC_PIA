@@ -28,14 +28,11 @@ def Hashes(ruta):
     os.chdir(ruta)
     for root, dirs, files in os.walk(".", topdown=False):
         for name in files:
-            try:
                 with open(os.path.join(root, name), 'rb') as file:
                     datos = file.read()
                     hash = hashlib.sha512(datos)
                     hasheado = hash.hexdigest()
                     setHashes.add(hasheado)
-            except Exception as e:
-                print("Ocurrió un error inesperado: " + str(e))
     return setHashes
 #=====================================================
 
@@ -44,17 +41,15 @@ def dumpHashes(path, outfile):
     hashes = Hashes(path)
     with open(outfile, 'wb') as out:
         pickle.dump(hashes, out)
+        print('Archivo de hashes guardado en:', outfile)
 
 
 def compareHashes(path, path_comp):
     # Obtiene un set con hashes, carga el ubicado en path_comp (pickled), y los compara
     hashes = Hashes(path)
-    try:
-        with open(path_comp, 'rb') as archivo1:
-            setHashes = pickle.load(archivo1)
-            if type(setHashes) == set:
-                return setHashes == hashes
-    except Exception as er:
-        print("Excepcion: " + str(er))
+    with open(path_comp, 'rb') as archivo1:
+        setHashes = pickle.load(archivo1)
+        if type(setHashes) == set:
+            return setHashes == hashes
     return None
 
