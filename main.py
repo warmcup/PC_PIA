@@ -24,12 +24,14 @@ if __name__ == '__main__':
             + Desencriptar los archivos que se encuentran en la carpeta DATOS con la llave encript.key
                 cripto -m desen -a C:\\Users\\HP\\Desktop\\PIA\\DATOS -llv encript.key 
                 '''
+
     ejemplos_scan = '''Ejemplos de uso:
             + Escanear con nmap el host 192.168.10.1
                 scan -m nmap -i 192.168.10.1
             + Escanear con sockets el host 192.168.10.1
                 scan --modo nmap --ip 192.168.10.1
                 '''
+                
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command', help='Funciones')
     

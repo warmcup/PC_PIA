@@ -1,0 +1,6 @@
+cryptography==38.0.1
+matplotlib==3.6.0
+openpyxl==3.0.9
+pe_parser==0.1.2
+pefile==2022.5.30
+requests==2.27.1
