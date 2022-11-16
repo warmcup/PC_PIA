@@ -69,7 +69,7 @@ python main.py analyze -e sample.bin
 ```
 
 ### Módulo cripto
-Realiza la extracción de datos específicos (correos, ip, usuarios) en archivos, para la encriptación y desencriptación de los datos, para generar un reporte. 
+Realiza la extracción de datos específicos (correos, ip, usuarios) en archivos, y los encripta y desencripta en reportes generados. 
 
 #### Argumentos admitidos
 
