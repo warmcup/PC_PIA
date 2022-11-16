@@ -58,7 +58,7 @@ if __name__ == '__main__':
                         help="Nombre del archivo con hashes contra el cual comparar; necesario para el modo comp")
     
     # Parser del modulo cripto
-    parser_cripto = subparsers.add_parser('cripto', help='Realiza la extracción de datos sensibles en un archivo, así como su encriptación y desencriptación, y la generación de un reporte', epilog=ejemplos_cripto, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser_cripto = subparsers.add_parser('cripto', help='Realiza la extracción de datos específicos (correos, ip, usuarios) en archivos, y los encripta y desencripta en reportes generados', epilog=ejemplos_cripto, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser_cripto.add_argument('-m', '--modo', dest='modo',
                         required=True,
                         help="Modo de ejecución: encrp (encriptar) , desen (desencriptar)")                     
