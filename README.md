@@ -71,6 +71,8 @@ python main.py analyze -e sample.bin
 ### Módulo cripto
 Realiza la extracción de datos específicos (correos, ip, usuarios) en archivos, para la encriptación y desencriptación de los datos, para generar un reporte. 
 
+#### Argumentos admitidos
+
 | Argumento     | Descripción |
 |:-------------:|:---------------:|
 | -m MODO, --modo MODO |  Modo de ejecución: encrp (encriptar) , desen (desencriptar) |
@@ -88,9 +90,26 @@ Desencriptar los archivos que se encuentran en la carpeta DATOS con la llave enc
 python main.py cripto -m desen -a C:\Users\HP\Desktop\PIA\DATOS -llv encript.key
 ```
 
-
-
 ### Módulo scan
+Obtiene informacion de un host en la red, como puertos comunes abiertos, y sistema operativo detectado (exclusivo del modo socket).
+
+#### Argumentos admitidos
+
+| Argumento     | Descripción |
+|:-------------:|:---------------:|
+| -m MODO, --modo MODO |  Modo de ejecución: nmap (nmap) , sock (socket) |
+| -i DIRECCION_IP, --ip DIRECCION_IP | Direccion del host a escanear |
+
+#### Ejemplos de uso
+Escanear con nmap el host 192.168.10.1
+```powershell
+python main.py scan -m nmap -i 192.168.10.1
+```
+
+Escanear con sockets el host 192.168.10.1
+```powershell
+python main.py scan --modo nmap --ip 192.168.10.1
+```
 
 ## Créditos
 + **@al3xand3r07**: módulo hash
